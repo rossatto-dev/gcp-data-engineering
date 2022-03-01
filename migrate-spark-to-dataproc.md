@@ -12,7 +12,7 @@ To get the bucket name used in the Dataproc instance you can run this command `e
 This is a chunk of code from [google cloud platform GitHub](https://github.com/GoogleCloudPlatform/training-data-analyst/blob/master/quests/sparktobq/01_spark.ipynb) that illustrates these changes.
 
 ### Using hdfs - Storage inside Dataproc cluster
-```
+```python
 from pyspark.sqlimport SparkSession, SQLContext, Row
 
 spark = SparkSession.builder.appName("kdd").getOrCreate()
@@ -22,8 +22,8 @@ raw_rdd = sc.textFile(data_file).cache()
 raw_rdd.take(5)
 ```
 
-# Using google cloud storage - Storage outside Dataproc cluster
-```
+### Using google cloud storage - Storage outside Dataproc cluster
+```python
 from pyspark.sql import SparkSession, SQLContext, Row
 
 spark = SparkSession.builder.appName("kdd").getOrCreate()
@@ -31,9 +31,15 @@ sc = spark.sparkContext
 data_file = "gs://{}/kddcup.data_10_percent.gz".format(BUCKET)
 raw_rdd = sc.textFile(data_file).cache()
 raw_rdd.take(5)
+
 .
 .
 .
-connections_by_protocol.write.format("csv").mode("overwrite").save("gs://{}/sparktobq/connections_by_protocol".format(BUCKET))
+
+connections_by_protocol.
+  write.
+  format("csv").
+  mode("overwrite").
+  save("gs://{}/sparktobq/connections_by_protocol".format(BUCKET))
 ```
  
